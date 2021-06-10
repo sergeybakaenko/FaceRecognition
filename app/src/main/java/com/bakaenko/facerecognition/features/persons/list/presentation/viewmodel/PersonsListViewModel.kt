@@ -1,11 +1,11 @@
-package com.bakaenko.facerecognition.features.presentation.viewmodel
+package com.bakaenko.facerecognition.features.persons.list.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bakaenko.facerecognition.features.data.model.PersonsListModel
-import com.bakaenko.facerecognition.features.data.repository.PersonsListRepository
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
+import com.bakaenko.facerecognition.features.persons.list.data.repository.PersonsListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

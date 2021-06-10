@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">FaceRecognition</string>
+    <string name="face_not_found">Sorry, no faces at this picture :(</string>
 </resources>

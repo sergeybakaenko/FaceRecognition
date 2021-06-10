@@ -1,12 +1,12 @@
-package com.bakaenko.facerecognition.features.data.di
+package com.bakaenko.facerecognition.features.persons.list.data.di
 
 import android.content.Context
-import com.bakaenko.facerecognition.features.data.ml.FaceRecognitionService
-import com.bakaenko.facerecognition.features.data.ml.FaceRecognitionServiceImpl
-import com.bakaenko.facerecognition.features.data.remotedatasource.PersonsListRemoteDataSource
-import com.bakaenko.facerecognition.features.data.remotedatasource.PersonsListRemoteDataSourceImpl
-import com.bakaenko.facerecognition.features.data.repository.PersonsListRepository
-import com.bakaenko.facerecognition.features.data.repository.PersonsListRepositoryImpl
+import com.bakaenko.facerecognition.ml.FaceRecognitionService
+import com.bakaenko.facerecognition.ml.FaceRecognitionServiceImpl
+import com.bakaenko.facerecognition.features.persons.list.data.remotedatasource.PersonsListRemoteDataSource
+import com.bakaenko.facerecognition.features.persons.list.data.remotedatasource.PersonsListRemoteDataSourceImpl
+import com.bakaenko.facerecognition.features.persons.list.data.repository.PersonsListRepository
+import com.bakaenko.facerecognition.features.persons.list.data.repository.PersonsListRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

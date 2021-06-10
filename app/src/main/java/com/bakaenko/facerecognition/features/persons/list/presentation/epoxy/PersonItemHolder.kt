@@ -1,7 +1,6 @@
-package com.bakaenko.facerecognition.features.presentation.epoxy
+package com.bakaenko.facerecognition.features.persons.list.presentation.epoxy
 
 import android.graphics.BitmapFactory
-import android.system.Os.open
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
@@ -9,8 +8,6 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bakaenko.facerecognition.R
 import com.bakaenko.facerecognition.base.BaseEpoxyHolder
 import com.bakaenko.facerecognition.databinding.ItemPersonBinding
-import java.nio.channels.AsynchronousFileChannel.open
-import java.nio.channels.DatagramChannel.open
 
 @EpoxyModelClass
 abstract class PersonItemHolder : EpoxyModelWithHolder<PersonItemHolder.Holder>() {
@@ -23,6 +20,9 @@ abstract class PersonItemHolder : EpoxyModelWithHolder<PersonItemHolder.Holder>(
     @EpoxyAttribute
     var imagePath: String? = null
 
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var openDetails: () -> Unit
+
     class Holder : BaseEpoxyHolder<ItemPersonBinding>() {
         override fun inflate(view: View) = ItemPersonBinding.bind(view)
     }
@@ -34,6 +34,10 @@ abstract class PersonItemHolder : EpoxyModelWithHolder<PersonItemHolder.Holder>(
                 imagePath?.let { image ->
                     val stream = root.context.assets.open((image))
                     personImage.setImageBitmap(BitmapFactory.decodeStream(stream))
+                }
+
+                root.setOnClickListener {
+                    openDetails()
                 }
             }
         }

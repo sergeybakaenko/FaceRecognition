@@ -1,10 +1,9 @@
-package com.bakaenko.facerecognition.features.data.ml
+package com.bakaenko.facerecognition.ml
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import android.util.Log
-import com.bakaenko.facerecognition.features.data.model.Person
-import com.bakaenko.facerecognition.features.data.model.PersonsListModel
+import com.bakaenko.facerecognition.features.persons.list.data.model.Person
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection

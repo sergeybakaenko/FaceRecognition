@@ -5,6 +5,22 @@
 
     <fragment
         android:id="@+id/personsListFragment"
-        android:name="com.bakaenko.facerecognition.features.presentation.view.PersonsListFragment"
-        android:label="PersonsListFragment" />
+        android:name="com.bakaenko.facerecognition.features.persons.list.presentation.view.PersonsListFragment"
+        android:label="PersonsListFragment" >
+        <action
+            android:id="@+id/openPersonDetails"
+            app:destination="@id/personDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/personDetailsFragment"
+        android:name="com.bakaenko.facerecognition.features.persons.details.presentation.view.PersonDetailsFragment"
+        android:label="PersonDetailsFragment" >
+        <argument
+            android:name="faceRectCoordinates"
+            app:argType="android.graphics.Rect"
+            app:nullable="true" />
+        <argument
+            android:name="person"
+            app:argType="com.bakaenko.facerecognition.features.persons.list.data.model.Person" />
+    </fragment>
 </navigation>

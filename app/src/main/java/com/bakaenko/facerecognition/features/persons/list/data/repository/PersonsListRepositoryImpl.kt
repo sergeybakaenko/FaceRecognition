@@ -1,8 +1,8 @@
-package com.bakaenko.facerecognition.features.data.repository
+package com.bakaenko.facerecognition.features.persons.list.data.repository
 
-import com.bakaenko.facerecognition.features.data.ml.FaceRecognitionService
-import com.bakaenko.facerecognition.features.data.model.PersonsListModel
-import com.bakaenko.facerecognition.features.data.remotedatasource.PersonsListRemoteDataSource
+import com.bakaenko.facerecognition.ml.FaceRecognitionService
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
+import com.bakaenko.facerecognition.features.persons.list.data.remotedatasource.PersonsListRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

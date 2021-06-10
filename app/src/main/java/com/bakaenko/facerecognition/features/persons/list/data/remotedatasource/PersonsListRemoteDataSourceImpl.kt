@@ -1,6 +1,6 @@
-package com.bakaenko.facerecognition.features.data.remotedatasource
+package com.bakaenko.facerecognition.features.persons.list.data.remotedatasource
 
-import com.bakaenko.facerecognition.features.data.model.Person
+import com.bakaenko.facerecognition.features.persons.list.data.model.Person
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -19,8 +19,6 @@ class PersonsListRemoteDataSourceImpl : PersonsListRemoteDataSource {
         val adapter: JsonAdapter<List<Person>> = moshi.adapter(type)
         val people = result?.let { adapter.fromJson(it) } ?: listOf()
 
-        return flow {
-            emit(people)
-        }
+        return flow { emit(people) }
     }
 }
