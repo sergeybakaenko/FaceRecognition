@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Tim Cook",
+        "img": "tim.jpg"
+    },
+    {
+        "name": "Carrot Top",
+        "img": "carrot.jpg"
+    },
+    {
+        "name": "Craig Federighi",
+        "img": "craig.jpg"
+    },
+    {
+        "name": "Eddy Cue",
+        "img": "tim.jpg"
+    },
+    {
+        "name": "Jony Ive",
+        "img": "jony.jpg"
+    },
+    {
+        "name": "iPhone 11 Pro",
+        "img": "iphone.jpg"
+    },
+    {
+        "name": "Phil Schiller",
+        "img": "phil.jpg"
+    }
+]
