@@ -13,7 +13,7 @@
     },
     {
         "name": "Eddy Cue",
-        "img": "tim.jpg"
+        "img": "eddy.jpg"
     },
     {
         "name": "Jony Ive",
@@ -26,5 +26,9 @@
     {
         "name": "Phil Schiller",
         "img": "phil.jpg"
+    },
+    {
+        "name": "Android",
+        "img": "android.png"
     }
 ]
