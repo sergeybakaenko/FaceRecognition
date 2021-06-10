@@ -56,7 +56,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     fun <T> handleErrors(baseState: BaseProps<T>) {
         when (baseState) {
-            is Error -> showToast(baseState.message)
+            is BaseProps.Error -> showToast(baseState.message)
         }
     }
 
