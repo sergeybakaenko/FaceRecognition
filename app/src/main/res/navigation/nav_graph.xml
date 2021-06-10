@@ -16,11 +16,7 @@
         android:name="com.bakaenko.facerecognition.features.persons.details.presentation.view.PersonDetailsFragment"
         android:label="PersonDetailsFragment" >
         <argument
-            android:name="faceRectCoordinates"
-            app:argType="android.graphics.Rect"
-            app:nullable="true" />
-        <argument
-            android:name="person"
-            app:argType="com.bakaenko.facerecognition.features.persons.list.data.model.Person" />
+            android:name="peronDetailsInfo"
+            app:argType="com.bakaenko.facerecognition.features.persons.details.data.models.PersonDetailsModel" />
     </fragment>
 </navigation>

@@ -2,14 +2,15 @@ package com.bakaenko.facerecognition.ml
 
 import android.content.Context
 import android.graphics.BitmapFactory
-import com.bakaenko.facerecognition.features.persons.list.data.model.Person
-import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonResponse
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.Face
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.suspendCancellableCoroutine
+import java.lang.Exception
 
 class FaceRecognitionServiceImpl(private val context: Context) : FaceRecognitionService {
 
@@ -27,17 +28,22 @@ class FaceRecognitionServiceImpl(private val context: Context) : FaceRecognition
             detector.process(image).addOnSuccessListener {
                 continuation.resumeWith(Result.success(it.maxByOrNull { it.boundingBox.width() * it.boundingBox.height() }))
             }.addOnFailureListener {
-                // TODO
+                throw it
             }
         }
     }
 
-    override suspend fun orderImagesByFacePresentPercentage(images: List<Person>): List<PersonsListModel.PersonModel> {
+    override suspend fun orderImagesByFacePresentPercentage(images: List<PersonResponse>): List<PersonModel> {
         val (detectedFaces, undetectedFaces) = images.map {
             if (it.image != null) {
                 val bitmap = BitmapFactory.decodeStream(context.assets.open(it.image))
                 val inputImage = InputImage.fromBitmap(bitmap, 0)
-                Triple(detectFace(inputImage), inputImage, it)
+                val face = try {
+                    detectFace(inputImage)
+                } catch (exception: Exception) {
+                    null
+                }
+                Triple(face, inputImage, it)
             } else {
                 null
             }
@@ -60,7 +66,7 @@ class FaceRecognitionServiceImpl(private val context: Context) : FaceRecognition
         val sortedAll = sortedDetectedFaces + sortedUndetectedFaces
 
         return sortedAll.map {
-            PersonsListModel.PersonModel(it?.first, it?.third?.name ?: "", it?.third?.image)
+            PersonModel(it?.first, it?.third?.name ?: "", it?.third?.image)
         }
     }
 }

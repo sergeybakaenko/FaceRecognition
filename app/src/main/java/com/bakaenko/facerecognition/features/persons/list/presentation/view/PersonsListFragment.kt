@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bakaenko.facerecognition.base.BaseFragment
+import com.bakaenko.facerecognition.base.BaseProps
+import com.bakaenko.facerecognition.base.value
 import com.bakaenko.facerecognition.databinding.FragmentPersonsListBinding
-import com.bakaenko.facerecognition.features.persons.list.data.model.Person
-import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
-import com.bakaenko.facerecognition.features.persons.list.presentation.epoxy.PersonItemHolder_
+import com.bakaenko.facerecognition.features.persons.details.data.models.PersonDetailsModel
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonModel
+import com.bakaenko.facerecognition.features.persons.list.presentation.epoxy.personItemHolder
 import com.bakaenko.facerecognition.features.persons.list.presentation.viewmodel.PersonsListViewModel
+import com.bakaenko.facerecognition.utils.visibleIf
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,30 +32,40 @@ class PersonsListFragment : BaseFragment<FragmentPersonsListBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.personLiveData.observe(viewLifecycleOwner) {
+        viewModel.props.observe(viewLifecycleOwner) {
             render(it)
         }
     }
 
-    private fun render(model: PersonsListModel) {
+    private fun render(props: BaseProps<List<PersonModel>>) {
         withBinding {
+            personsRecycler.visibleIf(props is BaseProps.Data)
+            progressBar.visibleIf(props is BaseProps.Loading)
 
-            personsRecycler.withModels {
-                model.items.forEach {
-                    PersonItemHolder_()
-                        .id(it.name)
-                        .name(it.name)
-                        .imagePath(it.image)
-                        .openDetails {
-                            root.findNavController().navigate(
-                                PersonsListFragmentDirections.openPersonDetails(
-                                    it.face?.boundingBox!!,
-                                    Person(it.name, it.image)
-                                )
-                            )
+            when (props) {
+                is BaseProps.Data -> {
+                    personsRecycler.withModels {
+                        props.value.forEach {
+                            personItemHolder {
+                                id(it.name)
+                                name(it.name)
+                                imagePath(it.image)
+                                openDetails {
+                                    root.findNavController().navigate(
+                                        PersonsListFragmentDirections.openPersonDetails(
+                                            PersonDetailsModel(
+                                                it.face?.boundingBox,
+                                                it.name,
+                                                it.image
+                                            )
+                                        )
+                                    )
+                                }
+                            }
                         }
-                        .addTo(this)
+                    }
                 }
+                else -> handleErrors(props)
             }
         }
     }

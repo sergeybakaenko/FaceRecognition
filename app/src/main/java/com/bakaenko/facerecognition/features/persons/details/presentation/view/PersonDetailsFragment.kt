@@ -25,8 +25,8 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
         withBinding {
 
-            val imagePath = args.person.image
-            val faceRect = args.faceRectCoordinates
+            val imagePath = args.peronDetailsInfo.imagePath
+            val faceRect = args.peronDetailsInfo.faceRect
 
             if (imagePath != null && faceRect != null) {
                 val stream = root.context.assets.open((imagePath))
@@ -37,7 +37,7 @@ class PersonDetailsFragment : BaseFragment<FragmentPersonDetailsBinding>() {
             val isFaceAvailable = imagePath != null && faceRect != null
             personImage.visibleIf(isFaceAvailable)
             errorText.visibleIf(!isFaceAvailable)
-            personName.text = args.person.name
+            personName.text = args.peronDetailsInfo.name
         }
     }
 }

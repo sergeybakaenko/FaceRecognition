@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">FaceRecognition</string>
     <string name="face_not_found">Sorry, no faces at this picture :(</string>
+    <string name="person_image_descr">Person image in the list</string>
+    <string name="something_went_wrong">Something went wrong</string>
+
 </resources>

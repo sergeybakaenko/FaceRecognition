@@ -11,7 +11,7 @@ fun Bitmap.drawRectangle(rect: Rect): Bitmap? {
         alpha = 0xA0
         color = Color.RED
         style = Paint.Style.STROKE
-        strokeWidth = 5f
+        strokeWidth = 10f
 
         canvas.drawRect(rect, this)
     }

@@ -53,4 +53,17 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         return bindingAfterRunning
             ?: error("Accessing binding outside of lifecycle: ${this::class.java.simpleName}")
     }
+
+    fun <T> handleErrors(baseState: BaseProps<T>) {
+        when (baseState) {
+            is Error -> showToast(baseState.message)
+        }
+    }
+
+    private fun showToast(message: String?) {
+        Toast.makeText(
+            context, message
+                ?: requireContext().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT
+        ).show()
+    }
 }

@@ -1,32 +1,30 @@
 package com.bakaenko.facerecognition.features.persons.list.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.bakaenko.facerecognition.features.persons.list.data.model.PersonsListModel
+import com.bakaenko.facerecognition.base.BaseProps.*
+import com.bakaenko.facerecognition.base.BaseViewModel
+import com.bakaenko.facerecognition.features.persons.list.data.model.PersonModel
 import com.bakaenko.facerecognition.features.persons.list.data.repository.PersonsListRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PersonsListViewModel @Inject constructor(private val repository: PersonsListRepository) : ViewModel() {
-
-    private val _personsLiveData = MutableLiveData<PersonsListModel>()
-    val personLiveData: LiveData<PersonsListModel>
-        get() = _personsLiveData
-
+class PersonsListViewModel @Inject constructor(private val repository: PersonsListRepository) :
+    BaseViewModel<List<PersonModel>>() {
 
     init {
+        _props.postValue(Loading())
         getPersonsList()
     }
 
     private fun getPersonsList() {
-        viewModelScope.launch {
+        launchIO {
             repository.getPersonsList().collect {
-                _personsLiveData.postValue(it)
+                val propsModel = when {
+                    it.isNotEmpty() -> Data(it)
+                    else -> Empty()
+                }
+                _props.postValue(propsModel)
             }
         }
     }
