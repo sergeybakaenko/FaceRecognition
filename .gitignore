@@ -1,0 +1,47 @@
+#  Application files
+*.apk
+*.ap_
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Gradle files
+.gradle/
+build/
+
+
+#Log Files
+*.log
+
+*.classpath
+
+# macOS
+*.DS_Store
+
+*.settings
+lint.xml
+
+*.project
+
+# properties
+local.properties
+*.properties
+
+# Android Studio
+.navigation/
+/captures
+output.json
+
+# IntelliJ
+.idea/misc.xml
+/.idea/workspace.xml
+/.idea
+*.idea
+*.iml
